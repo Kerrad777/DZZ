@@ -1,34 +1,34 @@
 pipeline {
     agent any
-    
     parameters {
-        string(defaultValue: '', description: 'Student name', name: 'studentName')
+        string(defaultValue: '', description: 'Имя студента', name: 'studentName')
     }
-    
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    credentialsId: 'b72b54ef-81f8-48fc-8658-836d9fcee8a8',
-                    url: 'https://github.com/Kerrad777/DZZ.git'
+                credentialsId: 'b72b54ef-81f8-48fc-8658-836d9fcee8a8',
+                url: 'https://github.com/Kerrad777/DZZ.git'
             }
         }
-        
+        stage('Install dependencies') {
+            steps {
+                sh 'pip install requests'
+            }
+        }
         stage('Build') {
             steps {
-                sh 'python -m pip install -r requirements.txt'
+                sh 'pip install -r requirements.txt'
             }
         }
-        
         stage('Run script') {
             steps {
-                sh 'python hello.py --name ${params.studentName}'
+                sh "python hello.py --name '${params.studentName}'"
             }
         }
-        
         stage('Save output') {
             steps {
-                sh 'python -c "import sys; sys.stdout.write(open(\'output.txt\').read())" > result.txt'
+                sh 'echo $BUILD_OUTPUT > result.txt'
                 archiveArtifacts artifacts: 'result.txt', onlyIfSuccessful: true
             }
         }
