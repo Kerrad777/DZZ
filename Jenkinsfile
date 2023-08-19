@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(defaultValue: '', description: 'Имя студента', name: 'studentName')
+        string(defaultValue: '', description: 'Student name', name: 'studentName')
     }
     stages {
         stage('Checkout') {
