@@ -8,15 +8,15 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    credentialsId: 'b72b54ef-81f8-48fc-8658-836d9fcee8a8',
+                git branch: 'master',
+                    credentialsId: 'your_credentials_id',
                     url: 'https://github.com/Kerrad777/DZZ.git'
             }
         }
         
         stage('Build') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'python -m pip install -r requirements.txt'
             }
         }
         
