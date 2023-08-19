@@ -11,11 +11,6 @@ pipeline {
                 url: 'https://github.com/Kerrad777/DZZ.git'
             }
         }
-        stage('Install dependencies') {
-            steps {
-                sh 'pip install requests'
-            }
-        }
         stage('Build') {
             steps {
                 sh 'pip install -r requirements.txt'
