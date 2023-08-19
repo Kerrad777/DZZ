@@ -28,7 +28,7 @@ pipeline {
         
         stage('Save output') {
             steps {
-                sh 'echo $BUILD_OUTPUT > result.txt'
+                sh 'python -c "import sys; sys.stdout.write(open(\'output.txt\').read())" > result.txt'
                 archiveArtifacts artifacts: 'result.txt', onlyIfSuccessful: true
             }
         }
