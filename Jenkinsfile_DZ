@@ -1,5 +1,8 @@
 pipeline {
-    agent ssh
+    agent any
+    triggers {
+        pollSCM('*/1 * * * *')
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -13,7 +16,7 @@ pipeline {
         }
         stage('Run Script') {
             steps {
-                sh 'python hello.py --name Yura student_name > result.txt'
+                sh 'python hello.py --name Yura > result.txt'
             }
         }
         stage('Save Result as Artifact') {
