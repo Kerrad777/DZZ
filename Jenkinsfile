@@ -1,4 +1,7 @@
 pipeline {
+    triggers {
+        pollSCM '*/3 * * * *'
+    }
     agent any
     parameters {
         string(defaultValue: '', description: 'Student name', name: 'studentName')
