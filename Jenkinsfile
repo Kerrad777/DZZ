@@ -8,7 +8,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Kerrad777/DZZ.git'
+                git branch: 'master',
+                    credentialsId: 'b72b54ef-81f8-48fc-8658-836d9fcee8a8',
+                    url: 'https://github.com/Kerrad777/DZZ.git'
             }
         }
         
